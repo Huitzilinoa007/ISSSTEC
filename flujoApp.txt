@@ -1,0 +1,238 @@
+=================================
+          METRODS
+ Simulador de Red de Metro
+=================================
+
+Estación actual: Hidalgo
+
+1. Estaciones
+2. Trenes
+3. Navegación y rutas
+4. Red del metro
+5. Ordenamientos
+6. Estadísticas
+7. Historial
+8. Salir
+
+Seleccione una opción:
+
+=================================
+
+1. Estaciones
+Permite administrar la información de las estaciones.
+
+===== ESTACIONES =====
+
+1. Agregar estación
+2. Modificar estación
+3. Eliminar estación
+4. Consultar estación
+5. Mostrar todas las estaciones
+6. Regresar
+Flujo: Agregar estación
+Nombre: Tacuba
+Línea: 2
+Afluencia diaria: 35000
+
+Estación registrada correctamente.
+Flujo: Consultar estación
+Ingrese el nombre de la estación:
+
+> Tacuba
+
+Resultado:
+
+ID: 15
+Nombre: Tacuba
+Línea: 2
+Afluencia diaria: 35000 pasajeros
+Conexiones: Cuitláhuac, Panteones
+
+=================================
+
+2. Trenes
+Administración de trenes.
+
+===== TRENES =====
+
+1. Registrar tren
+2. Modificar tren
+3. Eliminar tren
+4. Consultar tren
+5. Mostrar trenes
+6. Regresar
+Flujo: Registrar tren
+ID: 103
+Línea: 2
+Capacidad: 1200
+
+Tren registrado correctamente.
+Flujo: Mostrar trenes
+ID     Línea     Capacidad
+
+101      1         1000
+102      3         900
+103      2         1200
+
+=================================
+
+3. Navegación y rutas
+===== NAVEGACIÓN Y RUTAS =====
+
+Estación actual: Hidalgo
+
+1. Cambiar estación actual
+2. Buscar estación
+3. Mostrar ruta
+4. Simular viaje
+5. Regresar
+Flujo: Cambiar estación actual
+Ingrese estación actual:
+
+> Balderas
+
+Ubicación actual actualizada.
+Flujo: Buscar estación
+Ingrese nombre de estación:
+
+> Pantitlán
+
+El sistema realiza búsqueda lineal o binaria.
+
+Resultado:
+
+Nombre: Pantitlán
+Línea: 1
+Afluencia: 85000 pasajeros
+
+Además guarda la consulta en el historial.
+
+Flujo: Mostrar ruta
+Origen: Balderas
+Destino: Pantitlán
+
+Resultado:
+
+Ruta encontrada:
+
+Balderas
+↓
+Salto del Agua
+↓
+Pino Suárez
+↓
+San Lázaro
+↓
+Pantitlán
+
+Flujo: Simular viaje
+Origen: Balderas
+Destino: Pantitlán
+
+Recorrido iniciado...
+Balderas
+↓
+Salto del Agua
+↓
+Pino Suárez
+↓
+San Lázaro
+↓
+Pantitlán
+Viaje completado.
+
+El viaje se almacena en la pila del historial y debe de actualizar la estación actual.
+
+=================================
+4. Red del metro
+Administración de conexiones.
+
+===== RED DEL METRO =====
+
+1. Agregar conexión
+2. Eliminar conexión
+3. Mostrar conexiones de una estación
+4. Mostrar red completa
+5. Regresar
+Flujo: Agregar conexión
+Estación A: Hidalgo
+Estación B: Balderas
+
+Conexión agregada.
+
+Internamente actualiza la matriz de adyacencia.
+
+Flujo: Mostrar conexiones
+Ingrese estación:
+
+> Hidalgo
+
+Resultado:
+
+Conectada con:
+
+- Balderas
+- Guerrero
+- Bellas Artes
+
+=================================
+5. Ordenamientos
+
+===== ORDENAMIENTOS =====
+
+1. Ordenar estaciones por nombre
+2. Ordenar estaciones por afluencia
+3. Ordenar trenes por capacidad
+4. Regresar
+Flujo: Ordenar estaciones por afluencia
+
+Antes:
+
+Tacuba      35000
+Pantitlán   85000
+Hidalgo     45000
+
+Después:
+
+Pantitlán   85000
+Hidalgo     45000
+Tacuba      35000
+
+Aquí con QuickSort o MergeSort.
+
+=================================
+6. Estadísticas
+
+===== ESTADÍSTICAS =====
+
+1. Total de estaciones
+2. Total de trenes
+3. Estación más concurrida
+4. Estación menos concurrida
+5. Mostrar resumen general
+6. Regresar
+Flujo: Resumen general
+Total de estaciones: 45
+Total de trenes: 18
+
+Estación más concurrida:
+Pantitlán
+
+Estación menos concurrida:
+Observatorio
+
+=================================
+7. Historial
+Implementado con pila.
+
+===== HISTORIAL =====
+
+1. Ver última consulta
+2. Mostrar historial completo
+3. Eliminar último registro
+4. Regresar
+Flujo: Mostrar historial
+1. Ruta: Hidalgo -> Pantitlán
+2. Consulta: Tacuba
+3. Ruta: Balderas -> Tacubaya
+4. Consulta: Hidalgo

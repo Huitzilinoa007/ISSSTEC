@@ -1,0 +1,117 @@
+REPARTICIÓN DEL PROYECTO ISSSTEC
+
+=================================
+HUISHIL
+=================================
+
+Archivos:
+
+- pacientes.cpp
+- pacientes.h
+- consultas.cpp
+- consultas.h
+- historial.cpp
+- historial.h
+
+Responsabilidades:
+
+PACIENTES
+- Registrar paciente
+- Modificar paciente
+- Eliminar paciente
+- Consultar paciente
+- Mostrar todos los pacientes
+
+CONSULTAS
+- Buscar paciente por nombre (búsqueda lineal)
+- Buscar paciente por expediente (búsqueda binaria)
+- Mostrar información completa del paciente
+
+HISTORIAL (PILA)
+- Registrar acción en historial
+- Ver última acción
+- Mostrar historial completo
+- Eliminar último registro
+
+RECURSIVIDAD
+- Mostrar pacientes recursivamente
+- Contar pacientes recursivamente
+
+Estructuras:
+- Paciente
+- NodoPaciente
+- NodoHistorial
+
+
+=================================
+XIMECHIRRIS
+=================================
+
+Archivos:
+
+- consultorios.cpp
+- consultorios.h
+- atencion.cpp
+- atencion.h
+- ordenamientos.cpp
+- ordenamientos.h
+- estadisticas.cpp
+- estadisticas.h
+
+Responsabilidades:
+
+CONSULTORIOS
+- Registrar consultorio
+- Modificar consultorio
+- Eliminar consultorio
+- Consultar consultorio
+- Mostrar consultorios
+
+ATENCIÓN MÉDICA (COLA)
+- Agregar paciente a la cola
+- Atender siguiente paciente
+- Mostrar cola de espera
+- Mostrar pacientes por consultorio
+
+ORDENAMIENTOS
+- Ordenar pacientes por nombre
+- Ordenar pacientes por edad
+- Ordenar pacientes por prioridad
+- Implementar QuickSort o MergeSort
+
+ESTADÍSTICAS
+- Total de pacientes registrados
+- Pacientes atendidos
+- Pacientes en espera
+- Paciente de mayor edad
+- Paciente de menor edad
+- Edad promedio
+- Pacientes por consultorio
+- Resumen general
+
+Estructuras:
+- Consultorio
+- NodoCola
+- Cola
+
+
+=================================
+COMPARTIDO
+=================================
+
+Archivos:
+
+- main.cpp
+- menu.cpp
+- menu.h
+- estructuras.h
+
+Acuerdos:
+
+- estructuras.h se define desde el inicio y no se modifica sin avisar.
+- main.cpp se utiliza para la integración final.
+- menu.cpp y menu.h se completan cuando todos los módulos estén terminados.
+
+Dependencia mínima:
+
+Paciente* buscarPacienteExpediente(int expediente);

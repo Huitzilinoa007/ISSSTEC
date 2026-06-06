@@ -1,20 +1,17 @@
 #ifndef ESTRUCTURAS_H
 #define ESTRUCTURAS_H
-#include <string>
-
-using namespace std;
 
 //PACIENTES
 struct Paciente{
     int idPaciente;
-    string nombre;
-    string apellidos;
+    char nombre[40];
+    char apellidos[40];
     int edad;
-    string nss;
+    char nss[11];
     int prioridad;
     int estadoRevision;
-    string enfermedad;
-    string fechaIngreso;
+    char enfermedad[40];
+    char fechaIngreso[10];
 };
 struct NodoPaciente{
     Paciente paciente;
@@ -26,8 +23,8 @@ struct NodoPaciente{
 struct Consultorio
 {
     int numero;
-    string medico;
-    string especialidad;
+    char medico[100];
+    char especialidad[100];
 };
 
 struct NodoConsultorio
@@ -39,15 +36,15 @@ struct NodoConsultorio
 //Lista de Espera
 struct NodoListaEspera
 {
-    Paciente paciente;
+    char paciente[100];
     NodoListaEspera* siguiente;
 };
 
 // Historial (pila)
 struct RegistroHistorial
 {
-    string fecha;
-    string accion;
+    char fecha[100];
+    char accion[100];
 };
 
 struct NodoHistorial

@@ -81,6 +81,7 @@ void menuPacientes(){
         switch (opc){
         case 1:
             insertPaciente();
+            break;
         case 2:
             updatePaciente();
             break;
@@ -95,6 +96,7 @@ void menuPacientes(){
             break;
         case 6:
             verifi = false;
+            break;
         default:
             verifi = false;
             break;

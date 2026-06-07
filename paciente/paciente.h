@@ -1,7 +1,7 @@
 #ifndef PACIENTE_H
 #define PACIENTE_H
 
-#include<../estructuras.h>
+#include "../estructuras.h"
 
 void insertPaciente();
 void updatePaciente();

@@ -1,11 +1,11 @@
 #ifndef CONSULTORIO_H
 #define CONSULTORIO_H
 
-#include<../estructuras.h>
+#include "../estructuras.h"
 
+void createConsultorios();
 void insertConsultorio();
 void updateConsultorio();
-void deleteConsultorio();
 void findConsultorio();
 void findAllConsultorios();
 

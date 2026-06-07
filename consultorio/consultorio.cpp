@@ -7,16 +7,39 @@
 using namespace std;
 NodoConsultorio* headConsultorio = NULL;
 
-void insertConsultorio(){
-    char medico[40];
+//Se crea una cantidad "default" de consultorios cerrados
+void createConsultorios(){
+    for (int i = 1; i <= 5; i++) {
+        NodoConsultorio* nuevo = (NodoConsultorio*) malloc(sizeof(NodoConsultorio));
+        nuevo->consultorio.numero = i;
+        strcpy(nuevo->consultorio.medico, "Sin Asignar");
+        strcpy(nuevo->consultorio.paciente, "Ninguno");
+        nuevo->consultorio.estado = 0; // Empiezan inhabilitados (0), 1-> habilitados
+        nuevo->consultorio.disponibilidad = 0;  //0->No Disponible, 1->Disponible
+        nuevo->siguiente = NULL;
 
-    //Se pide el dato del médico asociado
+        if (headConsultorio == NULL) {
+            headConsultorio = nuevo;
+        } else {
+            NodoConsultorio* temp = headConsultorio;
+            while (temp->siguiente != NULL) {
+                temp = temp->siguiente;
+            }
+            temp->siguiente = nuevo;
+        }
+    }
+}
+//Función para agregar consultorios adicionales
+void insertConsultorio(){
+    char medico[60];
+
+    //Solicitud de datos referentes al consultorio
     cout<<"\n\n=================================";
     cout<<"\nRegistar nuevo consultorio";
     cout<<"\n=================================";
     cin.ignore();
     cout<<"\nNombre del médico asignado: ";
-    cin.getline(medico, 40);
+    cin.getline(medico, 60);
 
     //Se crea el nuevo nodo a insertar a la lista de consultorios
     NodoConsultorio* newConsultorio = (NodoConsultorio*) malloc(sizeof(NodoConsultorio));
@@ -25,7 +48,9 @@ void insertConsultorio(){
         return;
     }
     strcpy(newConsultorio->consultorio.medico, medico);
-    strcpy(newConsultorio->consultorio.paciente, "Disponible");
+    strcpy(newConsultorio->consultorio.paciente, "Ninguno"); //Asignación por defecto
+    newConsultorio->consultorio.estado = 1;
+    newConsultorio->consultorio.disponibilidad = 1;
     newConsultorio->siguiente = NULL;
 
     if (headConsultorio == NULL) {
@@ -46,7 +71,7 @@ void insertConsultorio(){
     //mostramos consultorios
     findAllConsultorios();
 }
-
+//Función para modificar la información de un consultorio
 void updateConsultorio(){
     int numBuscar;
     cout << "\nIngrese el número de consultorio: ";
@@ -60,65 +85,61 @@ void updateConsultorio(){
     if(consultorio == NULL){
         cout<<"\nNo se encontró el consultorio #" << numBuscar;
     }else{
-        char medicoNuevo[40];
+        char medicoNuevo[60];
         int opc;
+        printConsultorio(consultorio);
         cout<<"\n¿Qué desea realizar?";
-        cout<<"\n\n1.- Modificar médico asignado";
-        cout<<"\n2.- Cancelar";
+        cout<<"\n\n1.- Habilitar/Inhabilitar consultorio";
+        cout<<"\n2.- Modificar médico asignado";
+        cout<<"\n3.- Cancelar";
         cout<<"\n\nIngrese el número de la operación a realizar: ";
         cin>>opc;
 
-        if (opc == 1){
-            cout << "Médico asignado (actual): " << consultorio->consultorio.medico << "\n";
-            cout << "Ingrese el nuevo nombre del médico: ";
-            cin.getline(medicoNuevo, 40);
-            //actualización
-            strcpy(consultorio->consultorio.medico, medicoNuevo);
-            cout << "Médico actualizado\n";
-            printConsultorio(consultorio);
-        }else if (opc == 2){
-            cout << "No se realizaron cambios\n";
-        }else{
-            cout << "Opción no disponible\n";
-        }
-        
+        switch (opc){
+            case 1:
+                if (consultorio->consultorio.estado == 0){
+                    consultorio->consultorio.estado = 1;
+                    consultorio->consultorio.disponibilidad = 1;
+                    cout << "Se habilitó el consultorio #"<<numBuscar << "\n";
+                    //registrar médico después de habilitar un consultorio
+                    cout<<"\n\n---------------------------------";
+                    cin.ignore();
+                    cout<<"\nNombre del médico asignado: ";
+                    cin.getline(medicoNuevo, 60);
+                    strcpy(consultorio->consultorio.medico, medicoNuevo);
+                    strcpy(consultorio->consultorio.paciente, "Ninguno"); //Asignación por defecto
+                }else{
+                    strcpy(consultorio->consultorio.medico, "Sin Asignar");
+                    strcpy(consultorio->consultorio.paciente, "Ninguno");
+                    consultorio->consultorio.estado = 0;
+                    consultorio->consultorio.disponibilidad = 0;
+                    
+                    cout << "Se deshabilitó el consultorio #"<<numBuscar << "\n";
+                }
+                printConsultorio(consultorio);
+                break;
+            case 2:
+                if(consultorio->consultorio.estado != 0){
+                    cout << "Médico asignado (actual): " << consultorio->consultorio.medico << "\n";
+                    cout << "Ingrese el nuevo nombre del médico: ";
+                    cin.getline(medicoNuevo, 60);
+                    //actualización
+                    strcpy(consultorio->consultorio.medico, medicoNuevo);
+                    cout << "Médico actualizado\n";
+                    printConsultorio(consultorio);
+                }else{
+                    cout << "El consultorio #"<<numBuscar << " no está habilitado";
+                }
+                
+                break;
+            case 3:
+                cout << "No se realizaron cambios\n";
+                break;
+            default:
+                cout << "Opción no disponible\n";
+                break;
+            }
     }
-}
-
-void deleteConsultorio(){
-    int idBorrar;
-    cout << "\nIngrese el número de consultorio que desea eliminar: ";
-    cin >> idBorrar;
-
-    if (headConsultorio == NULL) {
-        cout << "\nNo hay consultorios en el sistema.";
-        return;
-    }
-
-    NodoConsultorio* temp = headConsultorio;
-    NodoConsultorio* anterior = NULL;
-
-    //borrar al inicio
-    if (temp != NULL && temp->consultorio.numero == idBorrar) {
-        headConsultorio = temp->siguiente;
-        free(temp);
-        cout << "\nConsultorio #" << idBorrar << " eliminado exitosamente.";
-        return;
-    }
-
-    // borrar en medio
-    while (temp != NULL && temp->consultorio.numero != idBorrar) {
-        anterior = temp;
-        temp = temp->siguiente;
-    }
-    if (temp == NULL) {
-        cout << "\nNo se encontró el consultorio #" << idBorrar;
-        return;
-    }
-
-    anterior->siguiente = temp->siguiente;
-    free(temp);
-    cout << "\nConsultorio #" << idBorrar << " eliminado exitosamente.";
 }
 
 void findConsultorio(){
@@ -154,11 +175,13 @@ void findAllConsultorios(){
 
 NodoConsultorio* getConsultorio(int num){
     NodoConsultorio* aux = headConsultorio;
-    while(aux->siguiente != NULL){
+    while (aux != NULL){
         if(aux->consultorio.numero == num){
             return aux;
         }
-    }    
+        aux = aux->siguiente;
+    } 
+    return NULL; 
 }
 
 void printConsultorio(NodoConsultorio* consultorio){
@@ -167,6 +190,16 @@ void printConsultorio(NodoConsultorio* consultorio){
     cout << "\n----------------------------------------";
 
     cout << "\nMédico asignado: "<< consultorio->consultorio.medico;
+    if (consultorio->consultorio.estado == 0){
+        cout << "\nEstado: Inhabilitado";
+    }else{
+        cout << "\nEstado: Habilitado";
+    }
+    if (consultorio->consultorio.disponibilidad == 0){
+        cout << "\n----- No Disponible -----";
+    }else{
+        cout << "\n------- Disponible ------";
+    }
     cout << "\nPaciente actual: "<< consultorio->consultorio.paciente;
     cout << "\n";
 }

@@ -23,8 +23,10 @@ struct NodoPaciente{
 struct Consultorio
 {
     int numero;
-    char medico[100];
-    char paciente[100];
+    char medico[60];
+    char paciente[60];
+    int estado;
+    int disponibilidad;
 };
 
 struct NodoConsultorio

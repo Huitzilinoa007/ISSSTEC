@@ -11,7 +11,6 @@ struct Paciente{
     int prioridad;
     int estadoRevision;
     char enfermedad[40];
-    char fechaIngreso[10];
 };
 struct NodoPaciente{
     Paciente paciente;

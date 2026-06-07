@@ -10,7 +10,7 @@ NodoPaciente* headPaciente = NULL;
 
 void insertPaciente(){
     int edad, prioridad, estadoRevision = 0;
-    char nombre[40], apellidos[40], nss[11], enfermedad[40], fechaIngreso[10];
+    char nombre[40], apellidos[40], nss[11], enfermedad[40];
 
     //Se piden los datos del paciente
     cout<<"\n\n=================================";
@@ -29,8 +29,6 @@ void insertPaciente(){
     cin>>nss;
     cout<<"Nivel de prioridad: ";
     cin>>prioridad;
-    cout<<"Fecha de ingreso (DD/MM/YYYY): ";
-    cin>>fechaIngreso;
 
     //Se crea el nuevo nodo a insertar a la lista de pacientes 
     NodoPaciente* newPaciente;
@@ -42,7 +40,6 @@ void insertPaciente(){
     newPaciente->paciente.prioridad = prioridad;
     newPaciente->paciente.estadoRevision = 0;
     strcpy(newPaciente->paciente.enfermedad, "Ninguna");
-    strcpy(newPaciente->paciente.fechaIngreso, fechaIngreso);
     newPaciente->siguiente = NULL;
 
     //aquí se pone el nuevo paciente en la lista de pacientes
@@ -67,57 +64,132 @@ void insertPaciente(){
 }
 
 void updatePaciente(){
-    char nss[11];
-    cout<<"\nIngrese el NSS del paciente: ";
-    cin.getline(nss, 40);
+    if(headPaciente == NULL){
+        cout<<"\nNo hay pacientes registrados, vaya al menú 'Registrar paciente'";
+        return;
+    }
 
-    NodoPaciente* paciente = getPaciente(nss);
-    if(paciente == headPaciente){
-        cout<<"\nNo se encontró al paciente con NSS: ", nss, ". Intente con otro NSS.";
-    }else{
-        char nombre[40], apellidos[40], nss[11], enfermedad[40], fechaIngreso[10];
-        int opc, edad, prioridad, estadoRevision;
-        cout<<"\n¿Qué desea modificar?";
+    char nss[11];
+    cout<<"\n\n=======================================";
+    cout<<"\nActualizar información de los pacientes";
+    cout<<"\n=======================================";
+    cout<<"\n\nIngrese el NSS del paciente a actualizar su información: ";
+    cin>>nss;
+
+    NodoPaciente* nodoPaciente = getPaciente(nss);
+    if(nodoPaciente == NULL){
+        cout<<"\nNo se encontró al paciente con NSS: "<< nss << "\nIntente con otro NSS.";
+        return;
+    }
+
+    bool repModificar = false;
+    int opcMenu = 0;
+    int opcVolverModifi = 0;
+    do{
+        cout<<"\n¿Qué desea modificar de '"<< nodoPaciente->paciente.nombre << " " << nodoPaciente->paciente.apellidos <<"' con NSS: "<< nodoPaciente->paciente.nss <<"?";
         cout<<"\n\n1.- Nombre(s): ";
         cout<<"\n2.- Apellidos";
         cout<<"\n3.- Edad";
-        cout<<"\n4.- NSS";
-        cout<<"\n5.- Enfermedad";
-        cout<<"\n6.- Prioridd"; 
-        cout<<"\n7.- Estado de Revisión";
-        cout<<"\n8.- Fecha de ingreso";
-        cout<<"\n9.- Cancelar";
+        cout<<"\n4.- Enfermedad";
+        cout<<"\n5.- Prioridd"; 
+        cout<<"\n6.- Estado de Revisión";
+        cout<<"\n7.- Cancelar";
         cout<<"\n\nIngrese el número de la operación que desea realizar: ";
-        cin>>opc;
+        cin>>opcMenu;
 
-        switch (opc){
-            case 1:
+        switch (opcMenu){
+            case 1:{
+                char nombre[40];
+                cout<<"\nIngrese el nuevo nombre del paciente: ";
+                cin.ignore();
+                cin.getline(nombre, 40);
+                strcpy(nodoPaciente->paciente.nombre, nombre);
                 break;
-            case 2:
+            }
+                
+            case 2:{
+                char apellidos[40];
+                cout<<"\nIngrese los nuevos apellidos del paciente: ";
+                cin.ignore();
+                cin.getline(apellidos, 40);
+                strcpy(nodoPaciente->paciente.apellidos, apellidos);
                 break;
-            case 3:
+            }
+            case 3:{
+                int edad = 0;
+                cout<<"\nIngrese la nueva edad del paciente: ";
+                cin>>edad;
+                nodoPaciente->paciente.edad = edad;
                 break;
-            case 4: 
+            }
+            case 4:{
+                char enfermedad[40];
+                cout<<"\nIngrese la nueva enfermedad del paciente: ";
+                cin.ignore();
+                cin.getline(enfermedad, 40);
+                strcpy(nodoPaciente->paciente.enfermedad, enfermedad);
                 break;
-            case 5:
+            }
+            case 5:{
+                int prioridad;
+                cout<<"\nIngrese el nuevo nivel de prioridad del paciente: ";
+                cin>>prioridad;
+                nodoPaciente->paciente.prioridad = prioridad;
                 break;
-            case 6:
+            }
+            case 6:{
+                int estadoRevision;
+                cout<<"\nIngrese el nuevo estado de revisión del paciente: ";
+                cin>>estadoRevision;
+                nodoPaciente->paciente.estadoRevision = estadoRevision;
                 break;
+            }
             case 7:
-                break;
-            case 8:
-                break;
-            case 9:
+                cout<<"\nOperación cancelada con éxito";
                 break;
             default:
+                cout<<"ERROR: Ingrese un número válido en el rango dado.";
                 break;
         }
-        printPaciente(paciente);
-    }
+        if(opcMenu>=1 && opcMenu<=6){
+            cout<<"\nInformación actualizada con éxito";
+            printPaciente(nodoPaciente);
+
+            cout<<"\n¿Desea modificar otro dato de '"<< nodoPaciente->paciente.nombre << " " <<nodoPaciente->paciente.apellidos <<"' con NSS: "<< nodoPaciente->paciente.nss <<"?";
+            cout<<"\n1.- Si";
+            cout<<"\n2.- No";
+            cout<<"\nIngrese el número de la operación a realizar: ";
+            cin>>opcVolverModifi;
+            if(opcVolverModifi == 1){
+                repModificar = true;
+            }else{
+                repModificar = false;
+            }
+        }
+
+    }while(repModificar);
 }
 
 void deletePaciente(){
+    if(headPaciente == NULL){
+        cout<<"\nNo hay pacientes registrados, vaya al menú 'Registrar paciente'";
+        return;
+    }
 
+    char nss[11];
+    cout<<"\n\n=======================================";
+    cout<<"\nEliminar paciente";
+    cout<<"\n=======================================";
+    cout<<"\n\nIngrese el NSS del paciente a eliminar: ";
+    cin>>nss;
+
+    NodoPaciente* nodoPaciente = getPaciente(nss);
+    if(nodoPaciente == NULL){
+        cout<<"\nNo se encontró al paciente con NSS: "<< nss << "\nIntente con otro NSS.";
+        return;
+    }else{
+        
+    }
 }
 
 void findPaciente(){
@@ -148,11 +220,15 @@ void findAllPacientes()
 
 NodoPaciente* getPaciente(char nssPaciente[11]){
     NodoPaciente* aux = headPaciente;
-    while(aux->siguiente != NULL){
-        if(aux->paciente.nss == nssPaciente){
+
+    while(aux != NULL){
+        if(strcmp(aux->paciente.nss, nssPaciente) == 0){
             return aux;
         }
-    }    
+        aux = aux->siguiente;
+    }
+
+    return NULL;
 }
 
 void printPaciente(NodoPaciente* paciente){
@@ -161,21 +237,12 @@ void printPaciente(NodoPaciente* paciente){
     cout << "\n----------------------------------------";
 
     cout << "\nNombre(s): "<< paciente->paciente.nombre;
-
     cout << "\nApellidos: "<< paciente->paciente.apellidos;
-
     cout << "\nEdad: " << paciente->paciente.edad;
-
     cout << "\nNSS: " << paciente->paciente.nss;
-
     cout << "\nEnfermedad: " << paciente->paciente.enfermedad;
-
     cout << "\nPrioridad: " << getNivelPrioridad(paciente->paciente.prioridad);
-
     cout << "\nEstado: " << getEstadoRevision(paciente->paciente.estadoRevision);
-
-    cout << "\nFecha de ingreso: " << paciente->paciente.fechaIngreso;
-
     cout << "\n";
 }
 

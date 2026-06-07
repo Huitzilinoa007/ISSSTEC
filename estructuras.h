@@ -24,12 +24,12 @@ struct Consultorio
 {
     int numero;
     char medico[100];
-    char especialidad[100];
+    char paciente[100];
 };
 
 struct NodoConsultorio
 {
-    Consultorio dato;
+    Consultorio consultorio;
     NodoConsultorio* siguiente;
 };
 

@@ -3,6 +3,7 @@
 #include "../paciente/paciente.h"
 #include "../consultorio/consultorio.h"
 #include "../atencion/atencion.h"
+#include "../historial/historial.h"
 
 using namespace std;
 

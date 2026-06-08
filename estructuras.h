@@ -6,7 +6,7 @@ struct Paciente{
     char nombre[40];
     char apellidos[40];
     int edad;
-    char nss[11];
+    char nss[12];
     int prioridad;
     int estadoRevision;
     char enfermedad[40];
@@ -15,6 +15,8 @@ struct NodoPaciente{
     Paciente paciente;
     NodoPaciente * siguiente;
 };
+
+extern NodoPaciente* headPaciente;
 
 
 //CONSULTORIOS

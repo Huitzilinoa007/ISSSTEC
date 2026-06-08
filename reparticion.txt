@@ -76,10 +76,7 @@ ESTADÍSTICAS
 - Total de pacientes registrados
 - Pacientes atendidos
 - Pacientes en espera
-- Paciente de mayor edad
-- Paciente de menor edad
 - Edad promedio
-- Pacientes por consultorio
 - Resumen general
 
 Estructuras:

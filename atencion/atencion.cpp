@@ -14,26 +14,45 @@ extern const char* getNivelPrioridad(int prioridad);
 //función para agregar a la lista de espera
 void agregarACola(){
     char nssBuscar[11];
-
-    cout<<"\n\n=======================================";
-    cout<<"\nIngresar paciente a la lista de espera";
-    cout<<"\n=======================================";
-    cout<<"\n\nIngrese el NSS del paciente: ";
-    cin>>nssBuscar;
+    int opc;
+    bool buscar = false;
 
     extern NodoPaciente* headPaciente; // accedemos a la lista de pacientes
-    NodoPaciente* nodoP = getPacienteByNSS(headPaciente ,nssBuscar);
+    NodoPaciente* nodoP = NULL;
 
-    if (nodoP == NULL) {
-        cout << "\nEl NSS no está registrado. Accediendo al alta del paciente...\n";
-        insertPaciente(); //registramos al paciente
-        
-        nodoP = getPacienteByNSS(headPaciente, nssBuscar);
+    do {
+        buscar = false;
+        cout<<"\n\n=======================================";
+        cout<<"\nIngresar paciente a la lista de espera";
+        cout<<"\n=======================================";
+        cout<<"\nIngrese el NSS del paciente: ";
+        cin>>nssBuscar;
+
+        nodoP = getPacienteByNSS(headPaciente ,nssBuscar);
+
         if (nodoP == NULL) {
-            cout << "\nNo se encontró el registro del paciente";
-            return;
+            cout << "\nEl NSS no está registrado.\n > ¿Qué desea realizar?";
+            cout << "\n1.Intentar con otro NSS\n2.Registrar un nuevo paciente\n3.Salir";
+            cout << "\nIngrese la opción a hacer: ";
+            cin>>opc;
+            
+            if (opc == 1) {
+                buscar = true;
+            } else if (opc == 2) {
+                insertPaciente();
+                
+                nodoP = getPacienteByNSS(headPaciente, nssBuscar);
+                if (nodoP == NULL) {
+                    cout << "\nNo se encontró registro";
+                    return;
+                }
+            } 
+            else {
+                cout << "\nAcción cancelada";
+                return;
+            }
         }
-    }
+    } while (buscar);
 
     if (nodoP->paciente.estadoRevision == 1 || nodoP->paciente.estadoRevision == 2) {
         cout << "\nEste paciente ya se encuentra ";

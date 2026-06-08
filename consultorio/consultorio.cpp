@@ -221,7 +221,7 @@ void printConsultorio(NodoConsultorio *consultorio){
             cout << "\nPaciente actual: " << consultorio->consultorio.pacienteNss;
         }
     } else {
-        cout << "\nPaciente actual: Ninguno";
+        cout << "\nPaciente actual: N/A";
     }
     cout << "\n";
 }

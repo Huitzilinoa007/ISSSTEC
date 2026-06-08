@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../estructuras.h"
 #include "paciente.h"
+#include "../historial/historial.h"
 #include <cstring>
 #include <cstdlib>
 #include <iomanip>
@@ -18,6 +19,14 @@ void insertPaciente(){
     cout<<"\n=================================";
     cout<<"\n\nIngrese los datos del paciente";
 
+    cout<<"Número de Seguridad Social (NSS): ";
+    cin>>nss;
+    NodoPaciente* verifiNSS = getPacienteByNSS(headPaciente, nss);
+    if(verifiNSS != NULL){
+        cout<<"\nERROR: El paciente con el NSS ingresado ya fue registrado, intente de nuevo.";
+        return;
+    }
+
     cin.ignore();
     cout<<"\nNombre(s): ";
     cin.getline(nombre, 40);
@@ -25,14 +34,16 @@ void insertPaciente(){
     cin.getline(apellidos, 40);
     cout<<"Edad: ";
     cin>>edad;
-    cout<<"Número de Seguridad Social (NSS): ";
-    cin>>nss;
     cout<<"Nivel de prioridad: ";
     cin>>prioridad;
 
     //Se crea el nuevo nodo a insertar a la lista de pacientes 
     NodoPaciente* newPaciente;
     newPaciente = (NodoPaciente*) malloc(sizeof(NodoPaciente));
+    if(newPaciente == NULL){
+        cout<<"Error en memoria.";
+        return;
+    }
     strcpy(newPaciente->paciente.nombre, nombre);
     strcpy(newPaciente->paciente.apellidos, apellidos);
     newPaciente->paciente.edad = edad;
@@ -52,8 +63,18 @@ void insertPaciente(){
         }
         temp->siguiente = newPaciente;
     }
-
     cout<<"Paciente registrado con éxito";
+
+    //Aquí se genera el registro en el historial
+    char descripcion[200];
+    sprintf(
+        descripcion,
+        "Paciente %s %s registrado",
+        newPaciente->paciente.nombre,
+        newPaciente->paciente.apellidos
+    );
+    pushHistorial("REGISTRO PACIENTE", descripcion);
+    //fin de registrar la acción en el historial
 
     //y ya que se registró al paciente, se muestran los pacientes registrados
     findAllPacientes();
@@ -72,7 +93,7 @@ void updatePaciente(){
     cout<<"\n\nIngrese el NSS del paciente a actualizar su información: ";
     cin>>nss;
 
-    NodoPaciente* nodoPaciente = getPacienteByNSS(nss);
+    NodoPaciente* nodoPaciente = getPacienteByNSS(headPaciente, nss);
     if(nodoPaciente == NULL){
         cout<<"\nNo se encontró al paciente con NSS: "<< nss << "\nIntente con otro NSS.";
         return;
@@ -100,6 +121,17 @@ void updatePaciente(){
                 cin.ignore();
                 cin.getline(nombre, 40);
                 strcpy(nodoPaciente->paciente.nombre, nombre);
+
+                //Aquí se genera el registro en el historial
+                char descripcion[200];
+                sprintf(
+                    descripcion,
+                    "Nombre actualizado para paciente con NSS:  %s",
+                    nodoPaciente->paciente.nss
+                );
+                pushHistorial("REGISTRO PACIENTE", descripcion);
+                //fin de registrar la acción en el historial
+
                 break;
             }
                 
@@ -109,6 +141,17 @@ void updatePaciente(){
                 cin.ignore();
                 cin.getline(apellidos, 40);
                 strcpy(nodoPaciente->paciente.apellidos, apellidos);
+
+                //Aquí se genera el registro en el historial
+                char descripcion[200];
+                sprintf(
+                    descripcion,
+                    "Apellidos actualizado para paciente con NSS::  %s",
+                    nodoPaciente->paciente.nss
+                );
+                pushHistorial("REGISTRO PACIENTE", descripcion);
+                //fin de registrar la acción en el historial
+
                 break;
             }
             case 3:{
@@ -116,6 +159,17 @@ void updatePaciente(){
                 cout<<"\nIngrese la nueva edad del paciente: ";
                 cin>>edad;
                 nodoPaciente->paciente.edad = edad;
+
+                //Aquí se genera el registro en el historial
+                char descripcion[200];
+                sprintf(
+                    descripcion,
+                    "Edad actualizada para paciente con NSS::  %s",
+                    nodoPaciente->paciente.nss
+                );
+                pushHistorial("REGISTRO PACIENTE", descripcion);
+                //fin de registrar la acción en el historial
+
                 break;
             }
             case 4:{
@@ -124,6 +178,17 @@ void updatePaciente(){
                 cin.ignore();
                 cin.getline(enfermedad, 40);
                 strcpy(nodoPaciente->paciente.enfermedad, enfermedad);
+
+                //Aquí se genera el registro en el historial
+                char descripcion[200];
+                sprintf(
+                    descripcion,
+                    "Enfermedad actualizada para paciente con NSS::  %s",
+                    nodoPaciente->paciente.nss
+                );
+                pushHistorial("REGISTRO PACIENTE", descripcion);
+                //fin de registrar la acción en el historial
+
                 break;
             }
             case 5:{
@@ -131,6 +196,17 @@ void updatePaciente(){
                 cout<<"\nIngrese el nuevo nivel de prioridad del paciente: ";
                 cin>>prioridad;
                 nodoPaciente->paciente.prioridad = prioridad;
+
+                //Aquí se genera el registro en el historial
+                char descripcion[200];
+                sprintf(
+                    descripcion,
+                    "Prioridad actualizada para paciente con NSS::  %s",
+                    nodoPaciente->paciente.nss
+                );
+                pushHistorial("REGISTRO PACIENTE", descripcion);
+                //fin de registrar la acción en el historial
+
                 break;
             }
             case 6:{
@@ -138,6 +214,17 @@ void updatePaciente(){
                 cout<<"\nIngrese el nuevo estado de revisión del paciente: ";
                 cin>>estadoRevision;
                 nodoPaciente->paciente.estadoRevision = estadoRevision;
+
+                //Aquí se genera el registro en el historial
+                char descripcion[200];
+                sprintf(
+                    descripcion,
+                    "Estado de revisión actualizado para paciente con NSS::  %s",
+                    nodoPaciente->paciente.nss
+                );
+                pushHistorial("REGISTRO PACIENTE", descripcion);
+                //fin de registrar la acción en el historial
+
                 break;
             }
             case 7:
@@ -201,7 +288,7 @@ void findPaciente(){
     cout<<"\n\nIngrese el NSS del paciente a consultar: ";
     cin>>nss;
 
-    NodoPaciente* nodoPaciente = getPacienteByNSS(nss);
+    NodoPaciente* nodoPaciente = getPacienteByNSS(headPaciente, nss);
     if(nodoPaciente == NULL){
         cout<<"\nNo se encontró al paciente con NSS: "<< nss << "\nIntente con otro NSS.";
         return;
@@ -232,17 +319,16 @@ void findAllPacientes()
     cout << "\n========================================\n";
 }
 
-NodoPaciente* getPacienteByNSS(char nssPaciente[11]){
-    NodoPaciente* aux = headPaciente;
-
-    while(aux != NULL){
-        if(strcmp(aux->paciente.nss, nssPaciente) == 0){
-            return aux;
-        }
-        aux = aux->siguiente;
+NodoPaciente* getPacienteByNSS(NodoPaciente* nodo, char nssPaciente[11]){
+    if(nodo == NULL){
+        return NULL;
     }
 
-    return NULL;
+    if(strcmp(nodo->paciente.nss, nssPaciente) == 0){
+        return nodo;
+    }
+
+    return getPacienteByNSS(nodo->siguiente, nssPaciente);
 }
 
 bool deletePacienteByNSS(char nssPaciente[11]){

@@ -1,6 +1,7 @@
 #include<iostream>
 #include "menu.h"
 #include "../paciente/paciente.cpp"
+#include "../historial/historial.cpp"
 
 using namespace std;
 
@@ -14,11 +15,10 @@ void menuPrincipal(){
         cout<<"\n\n1.- Pacientes";
         cout<<"\n2.- Consultorios";
         cout<<"\n3.- Atención médica";
-        cout<<"\n4.- Consultas";
-        cout<<"\n5.- Ordenamientos";
-        cout<<"\n6.- Estadísticas";
-        cout<<"\n7.- Historial";
-        cout<<"\n8.- Salir\n\nIngrese el número del menú al que desea ingresar: ";
+        cout<<"\n4.- Ordenamientos";
+        cout<<"\n5.- Estadísticas";
+        cout<<"\n6.- Historial";
+        cout<<"\n7.- Salir\n\nIngrese el número del menú al que desea ingresar: ";
 
         int opc = 0;
         cin>>opc;
@@ -33,18 +33,15 @@ void menuPrincipal(){
             menuAtencionMedica();
             break;
         case 4:
-            menuConsultas();
-            break;
-        case 5:
             menuOrdenamientos();
             break;
-        case 6:
+        case 5:
             menuEstadisticas();
             break;
-        case 7:
+        case 6:
             menuHistorial();
             break;
-        case 8: 
+        case 7: 
             cout<<"\n\n=================================";
             cout<<"\nFin del programa";
             cout<<"\n=================================\n";
@@ -68,7 +65,7 @@ void menuPacientes(){
         cout<<"\nPacientes";
         cout<<"\n=================================";
         cout<<"\n\n1.- Registrar paciente";
-        cout<<"\n2.- Modifiar paciente";
+        cout<<"\n2.- Modificar paciente";
         cout<<"\n3.- Eliminar paciente";
         cout<<"\n4.- Consultar paciente";
         cout<<"\n5.- Mostrar todos los pacientes";
@@ -104,6 +101,7 @@ void menuPacientes(){
 
     }while(verifi);
 }
+
 void menuConsultorios(){
     cout<<"Consultorios";
 }
@@ -120,5 +118,36 @@ void menuEstadisticas(){
     cout<<"Estadísticas";
 }
 void menuHistorial(){
-    cout<<"Historial";
+    bool verifi = true;
+    do{
+        cout<<"\n\n=================================";
+        cout<<"\nHistorial";
+        cout<<"\n=================================";
+        cout<<"\n\n1.- Ver última acción";
+        cout<<"\n2.- Ver todo el historial";
+        cout<<"\n3.- Eliminar historial";
+        cout<<"\n4.- Salir\n\nIngrese el número de la operación que desea realizar: ";
+        cout<<"";
+
+        int opc = 0;
+        cin>>opc;
+
+        switch (opc){
+            case 1:
+                peekHistorial();
+                break;
+            case 2:
+                showHistorial();
+                break;
+            case 3:
+                popHistorial();
+                break;
+            case 4:
+                verifi = false;
+                break;
+            default:
+                verifi = false;
+                break;
+        }
+    }while(verifi);
 }

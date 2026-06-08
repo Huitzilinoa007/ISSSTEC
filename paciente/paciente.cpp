@@ -6,6 +6,17 @@
 #include <cstdlib>
 #include <iomanip>
 
+/*
+    MÓDULO: Pacientes
+
+    Este archivo concentra la administración de los pacientes registrados
+    en el sistema. Aquí se realizan las operaciones de alta, consulta,
+    modificación, eliminación y visualización de pacientes, además de la
+    búsqueda por NSS y la generación de información necesaria para otros
+    módulos. También proporciona las funciones auxiliares para interpretar
+    los niveles de prioridad y los estados de revisión médica.
+*/
+
 using namespace std;
 NodoPaciente* headPaciente = NULL;
 

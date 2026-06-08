@@ -4,6 +4,15 @@
 #include <cstring>
 #include <cstdlib>
 
+/*
+    MÓDULO: Historial
+
+    Este archivo registra todas las acciones relevantes realizadas en el
+    sistema mediante una estructura de pila. Permite almacenar eventos,
+    consultar la última acción registrada, visualizar el historial completo
+    y eliminar los registros existentes cuando sea necesario.
+*/
+
 using namespace std;
 NodoHistorial* topHistorial = NULL;
 

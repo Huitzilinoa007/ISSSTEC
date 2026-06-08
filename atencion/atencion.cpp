@@ -6,9 +6,18 @@
 #include "../consultorio/consultorio.h"
 #include "../paciente/paciente.h"
 #include "../historial/historial.h"
+/*
+    MÓDULO: Atención de pacientes
 
+    Este archivo controla el flujo de atención médica de los pacientes.
+    Gestiona la lista de espera mediante una cola con prioridades, asigna
+    pacientes a consultorios disponibles, registra el inicio de las consultas
+    y permite finalizar la atención médica actualizando el estado de cada
+    paciente dentro del sistema.
+*/
 using namespace std;
 NodoCola* frenteCola = NULL;
+
 
 extern const char* getNivelPrioridad(int prioridad);
 //función para agregar a la lista de espera

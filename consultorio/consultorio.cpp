@@ -5,6 +5,16 @@
 #include <cstring>
 #include <cstdlib>
 
+/*
+    MÓDULO: Consultorios
+
+    Este archivo administra los consultorios disponibles dentro del sistema.
+    Permite crear consultorios iniciales, registrar nuevos consultorios,
+    modificar su información, habilitarlos o inhabilitarlos y consultar su
+    estado actual. Además, mantiene la relación entre los consultorios y
+    los pacientes que están siendo atendidos.
+*/
+
 using namespace std;
 NodoConsultorio *headConsultorio = NULL;
 

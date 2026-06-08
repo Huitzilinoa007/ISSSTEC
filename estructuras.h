@@ -1,6 +1,16 @@
 #ifndef ESTRUCTURAS_H
 #define ESTRUCTURAS_H
 
+/*
+    MÓDULO: Estructuras de datos
+
+    Este archivo define las estructuras utilizadas por todos los módulos
+    del sistema. Contiene las definiciones de pacientes, consultorios,
+    registros de historial y nodos de las distintas listas dinámicas,
+    permitiendo compartir una misma organización de datos en todo el
+    proyecto.
+*/
+
 //PACIENTES
 struct Paciente{
     char nombre[40];

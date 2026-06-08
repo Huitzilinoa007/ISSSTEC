@@ -7,6 +7,15 @@
 #include "../atencion/atencion.cpp"
 #include "../estadistica/estadistica.cpp"
 
+/*
+    MÓDULO: Menús
+
+    Este archivo contiene la interacción principal con el usuario. Administra
+    la navegación entre los distintos módulos del sistema mediante menús y
+    submenús, permitiendo acceder a las funcionalidades de pacientes,
+    consultorios, atención médica, historial, estadísticas y ordenamientos.
+*/
+
 using namespace std;
 
 void menuPrincipal(){

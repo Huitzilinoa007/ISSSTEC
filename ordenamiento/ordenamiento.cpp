@@ -4,6 +4,16 @@
 #include <iomanip>
 #include <cstring>
 
+/*
+    MÓDULO: Ordenamientos
+
+    Este archivo implementa los procesos de ordenamiento de pacientes
+    utilizando el algoritmo Merge Sort sobre listas enlazadas. Permite
+    organizar los registros por nombre completo, edad, nivel de prioridad
+    o estado de revisión, tanto en orden ascendente como descendente, para
+    facilitar la consulta y análisis de la información.
+*/
+
 using namespace std;
 
 void orderByNombre(int orden){

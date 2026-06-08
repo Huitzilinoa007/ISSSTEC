@@ -1,6 +1,16 @@
 #include <iostream>
 #include "estadistica.h"
 
+/*
+    MÓDULO: Estadísticas
+
+    Este archivo genera información estadística a partir de los pacientes
+    registrados en el sistema. Mediante funciones recursivas calcula el
+    total de pacientes, la cantidad de pacientes por estado de atención y
+    obtiene valores relevantes como las edades mínima y máxima registradas,
+    proporcionando un resumen general de la operación del sistema.
+*/
+
 using namespace std;
 
 extern NodoPaciente* headPaciente;

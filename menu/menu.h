@@ -6,9 +6,10 @@ void menuPrincipal();
 void menuPacientes();
 void menuConsultorios();
 void menuAtencionMedica();
-void menuConsultas();
 void menuOrdenamientos();
 void menuEstadisticas();
 void menuHistorial();
+
+int pedirOrden();
 
 #endif

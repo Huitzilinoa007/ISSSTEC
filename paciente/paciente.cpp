@@ -11,13 +11,13 @@ NodoPaciente* headPaciente = NULL;
 
 void insertPaciente(){
     int edad, prioridad, estadoRevision = 0;
-    char nombre[40], apellidos[40], nss[11], enfermedad[40];
+    char nombre[40], apellidos[40], nss[12], enfermedad[40];
 
     //Se piden los datos del paciente
     cout<<"\n\n=================================";
     cout<<"\nDar de alta paciente";
     cout<<"\n=================================";
-    cout<<"\n\nIngrese los datos del paciente: ";
+    cout<<"\n\nIngrese los datos del paciente.";
 
     cout<<"\nNúmero de Seguridad Social (NSS): ";
     cin>>nss;
@@ -28,7 +28,7 @@ void insertPaciente(){
     }
 
     cin.ignore();
-    cout<<"\nNombre(s): ";
+    cout<<"Nombre(s): ";
     cin.getline(nombre, 40);
     cout<<"Apellidos: ";
     cin.getline(apellidos, 40);
@@ -87,7 +87,7 @@ void updatePaciente(){
         return;
     }
 
-    char nss[11];
+    char nss[12];
     cout<<"\n\n=======================================";
     cout<<"\nActualizar información de los pacientes";
     cout<<"\n=======================================";
@@ -109,7 +109,7 @@ void updatePaciente(){
         cout<<"\n2.- Apellidos";
         cout<<"\n3.- Edad";
         cout<<"\n4.- Enfermedad";
-        cout<<"\n5.- Prioridd"; 
+        cout<<"\n5.- Prioriad"; 
         cout<<"\n6.- Estado de Revisión";
         cout<<"\n7.- Cancelar";
         cout<<"\n\nIngrese el número de la operación que desea realizar: ";
@@ -260,7 +260,7 @@ void deletePaciente(){
         return;
     }
 
-    char nss[11];
+    char nss[12];
     cout<<"\n\n=======================================";
     cout<<"\nEliminar paciente";
     cout<<"\n=======================================";
@@ -291,7 +291,7 @@ void findPaciente(){
         return;
     }
 
-    char nss[11];
+    char nss[12];
     cout<<"\n\n=======================================";
     cout<<"\nConsultar paciente";
     cout<<"\n=======================================";

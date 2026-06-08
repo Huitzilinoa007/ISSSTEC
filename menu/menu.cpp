@@ -4,6 +4,7 @@
 #include "../consultorio/consultorio.h"
 #include "../atencion/atencion.h"
 #include "../historial/historial.h"
+#include "../estadistica/estadistica.h"
 
 using namespace std;
 
@@ -192,7 +193,43 @@ void menuOrdenamientos(){
     cout<<"Ordenamientos";
 }
 void menuEstadisticas(){
-    cout<<"Estadísticas";
+    bool verifi;
+    do{
+        cout<<"\n\n=================================";
+        cout<<"\nEstadísticas";
+        cout<<"\n=================================";
+        cout<<"\n\n1.- Total de pacientes registrados";
+        cout<<"\n2.- Pacientes atendidos";
+        cout<<"\n3.- Pacientes en espera";
+        cout<<"\n4.- Resumen general";
+        cout<<"\n5.- Salir\n\nIngrese el número de la operación que desea realizar: ";
+        cout<<"";
+
+        int opc = 0;
+        cin>>opc;
+
+        switch (opc){
+        case 1:
+            mostrarTotal();
+            break;
+        case 2:
+            mostrarAtendidos();
+            break;
+        case 3:
+            mostrarEnCola();
+            break;
+        case 4:
+            mostrarResumen();
+            break;
+        case 5:
+            verifi = false;
+            break;
+        default:
+            verifi = false;
+            break;
+        }
+
+    }while(verifi);
 }
 void menuHistorial(){
     bool verifi = true;

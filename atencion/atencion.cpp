@@ -5,6 +5,7 @@
 #include "atencion.h"
 #include "../consultorio/consultorio.h"
 #include "../paciente/paciente.h"
+#include "../historial/historial.h"
 
 using namespace std;
 NodoCola* frenteCola = NULL;
@@ -80,6 +81,14 @@ void agregarACola(){
         temp->siguiente = nuevoP;
     }
     cout << "\nPaciente ingresado a la lista de espera";
+    char descripcion[200];
+        sprintf(
+            descripcion,
+            "Paciente %s %s agregado a la lista de espera",
+            nuevoP->paciente.nombre,
+            nuevoP->paciente.apellidos
+        );
+    pushHistorial("ATENCIÓN PACIENTE", descripcion);
 }
 
 void atenderPaciente(){
@@ -127,6 +136,15 @@ void atenderPaciente(){
     cout<<"\nAtendido por: "<< consDestino->consultorio.medico;
     cout<<"\n---------------------------------";
 
+    char descripcion[200];
+        sprintf(
+            descripcion,
+            "Paciente %s %s ingresado a consultorio",
+            pacienteActual->paciente.nombre,
+            pacienteActual->paciente.apellidos
+        );
+    pushHistorial("ATENCIÓN PACIENTE", descripcion);
+
     free(pacienteActual);
 }
 
@@ -172,7 +190,13 @@ void finalizarConsulta(){
         tempP = tempP->siguiente;
     }
     cout << "\n >>> Finalizando consulta del paciente con NSS: " << consBuscado->consultorio.pacienteNss;
-    
+    char descripcion[200];
+        sprintf(
+            descripcion,
+            "Consulta de paciente con NSS %s finalizada",
+            consBuscado->consultorio.pacienteNss
+        );
+    pushHistorial("ATENCIÓN PACIENTE", descripcion);
     // reestablecemos el consultorio
     strcpy(consBuscado->consultorio.pacienteNss, "N/A");
     consBuscado->consultorio.disponibilidad = 1; 

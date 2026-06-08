@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../estructuras.h"
 #include "consultorio.h"
+#include "../historial/historial.h"
 #include <cstring>
 #include <cstdlib>
 
@@ -75,6 +76,16 @@ void insertConsultorio(){
 
     cout << "Consultorio registrado con éxito";
 
+    //Aquí se genera el registro en el historial
+    char descripcion[200];
+    sprintf(
+        descripcion,
+        "Consultorio #%i agregado",
+        newConsultorio->consultorio.numero
+    );
+    pushHistorial("REGISTRO CONSULTORIO", descripcion);
+    //fin de registrar la acción en el historial
+
     // mostramos consultorios
     findAllConsultorios();
 }
@@ -124,6 +135,14 @@ void updateConsultorio(){
             strcpy(consultorio->consultorio.medico, medicoNuevo);
             strcpy(consultorio->consultorio.pacienteNss, "N/A");
             //strcpy(consultorio->consultorio.paciente, "Ninguno"); // Asignación por defecto
+            char descripcion[200];
+            sprintf(
+                descripcion,
+                "Consultorio #%i habilitado, asignado a : %s",
+                consultorio->consultorio.numero,
+                consultorio->consultorio.medico
+            );
+            pushHistorial("ACTUALIZACIÓN CONSULTORIO", descripcion);
         }
         else{
             strcpy(consultorio->consultorio.medico, "Sin Asignar");
@@ -133,6 +152,13 @@ void updateConsultorio(){
             consultorio->consultorio.disponibilidad = 0;
 
             cout << "Se deshabilitó el consultorio #" << numBuscar << "\n";
+            char descripcion[200];
+            sprintf(
+                descripcion,
+                "Consultorio #%i deshabilitado",
+                consultorio->consultorio.numero
+            );
+            pushHistorial("ACTUALIZACIÓN CONSULTORIO", descripcion);
         }
         printConsultorio(consultorio);
         break;
@@ -152,6 +178,14 @@ void updateConsultorio(){
         // actualización
         strcpy(consultorio->consultorio.medico, medicoNuevo);
         cout << "Médico actualizado\n";
+        char descripcion[200];
+            sprintf(
+                descripcion,
+                "Consultorio #%i asignado a médico: %s",
+                consultorio->consultorio.numero,
+                consultorio->consultorio.medico
+            );
+        pushHistorial("ACTUALIZACIÓN CONSULTORIO", descripcion);
         printConsultorio(consultorio);
         break;
     case 3:

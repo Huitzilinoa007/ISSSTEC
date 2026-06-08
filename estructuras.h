@@ -45,8 +45,8 @@ struct NodoCola
 // Historial (pila)
 struct RegistroHistorial
 {
-    char fecha[100];
-    char accion[100];
+    char modulo[30];
+    char accion[150];
 };
 
 struct NodoHistorial

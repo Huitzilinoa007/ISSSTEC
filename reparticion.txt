@@ -8,8 +8,6 @@ Archivos:
 
 - pacientes.cpp
 - pacientes.h
-- consultas.cpp
-- consultas.h
 - historial.cpp
 - historial.h
 
@@ -21,11 +19,6 @@ PACIENTES
 - Eliminar paciente
 - Consultar paciente
 - Mostrar todos los pacientes
-
-CONSULTAS
-- Buscar paciente por nombre (búsqueda lineal)
-- Buscar paciente por expediente (búsqueda binaria)
-- Mostrar información completa del paciente
 
 HISTORIAL (PILA)
 - Registrar acción en historial

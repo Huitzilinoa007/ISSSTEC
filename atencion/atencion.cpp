@@ -21,13 +21,13 @@ void agregarACola(){
     cin>>nssBuscar;
 
     extern NodoPaciente* headPaciente; // accedemos a la lista de pacientes
-    NodoPaciente* nodoP = getPacienteByNSS(nssBuscar);
+    NodoPaciente* nodoP = getPacienteByNSS(headPaciente ,nssBuscar);
 
     if (nodoP == NULL) {
         cout << "\nEl NSS no está registrado. Accediendo al alta del paciente...\n";
         insertPaciente(); //registramos al paciente
         
-        nodoP = getPacienteByNSS(nssBuscar);
+        nodoP = getPacienteByNSS(headPaciente, nssBuscar);
         if (nodoP == NULL) {
             cout << "\nNo se encontró el registro del paciente";
             return;
@@ -104,9 +104,10 @@ void atenderPaciente(){
         return;
     }
     //para quitar al paciente de la lista de espera
+    extern NodoPaciente* headPaciente;
     NodoCola* pacienteActual = frenteCola;
     frenteCola = frenteCola->siguiente;
-    NodoPaciente* nodoActual = getPacienteByNSS(pacienteActual->paciente.nss);
+    NodoPaciente* nodoActual = getPacienteByNSS(headPaciente, pacienteActual->paciente.nss);
     if (nodoActual != NULL) {
         nodoActual->paciente.estadoRevision = 2; //se encuentra en consulta ahora
     }

@@ -216,8 +216,10 @@ void printConsultorio(NodoConsultorio *consultorio){
     cout << "\nDisponibilidad: " << (consultorio->consultorio.disponibilidad == 0 ? "----- No Disponible -----" : "------- Disponible ------");
     //cout << "\nPaciente actual: " << consultorio->consultorio.paciente;
     if (consultorio->consultorio.disponibilidad == 0) {
-        extern NodoPaciente* getPacienteByNSS(char* nss); 
-        NodoPaciente* p = getPacienteByNSS(consultorio->consultorio.pacienteNss);
+        extern NodoPaciente* headPaciente;
+        extern NodoPaciente* getPacienteByNSS(NodoPaciente* nodo, char nssPaciente[11]);
+        //extern NodoPaciente* getPacienteByNSS(char* nss); 
+        NodoPaciente* p = getPacienteByNSS(headPaciente ,consultorio->consultorio.pacienteNss);
         if(p != NULL) {
             cout << "\nPaciente actual: " << p->paciente.nombre << " " << p->paciente.apellidos;
         } else {

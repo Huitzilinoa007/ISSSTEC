@@ -146,87 +146,8 @@ void menuConsultorios(){
         }
 
     }while(verifi);
-    bool verifi;
-    createConsultorios();
-    do{
-        cout<<"\n\n=================================";
-        cout<<"\nConsultorios";
-        cout<<"\n=================================";
-        cout<<"\n\n1.- Registrar consultorio";
-        cout<<"\n2.- Modificar consultorio";
-        cout<<"\n3.- Buscar consultorio";
-        cout<<"\n4.- Mostrar todos los consultorios";
-        cout<<"\n5.- Salir\n\nIngrese el número de la operación que desea realizar: ";
-        cout<<"";
-
-        int opc = 0;
-        cin>>opc;
-
-        switch (opc){
-        case 1:
-            insertConsultorio();
-            break;
-        case 2:
-            updateConsultorio();
-            break;
-        case 3:
-            findConsultorio();
-            break;
-        case 4:
-            findAllConsultorios();
-            break;
-        case 5:
-            verifi = false;
-            break;
-        default:
-            verifi = false;
-            break;
-        }
-
-    }while(verifi);
 }
 void menuAtencionMedica(){
-    bool verifi;
-    createConsultorios();
-    do{
-        cout<<"\n\n=================================";
-        cout<<"\nAtención médica";
-        cout<<"\n=================================";
-        cout<<"\n\n1.- Agregar paciente a la lista de espera";
-        cout<<"\n2.- Atender paciente";
-        cout<<"\n3.- Finalizar consulta";
-        cout<<"\n4.- Mostrar lista de espera";
-        cout<<"\n5.- Salir\n\nIngrese el número de la operación que desea realizar: ";
-        cout<<"";
-
-        int opc = 0;
-        cin>>opc;
-
-        switch (opc){
-        case 1:
-            agregarACola();
-            break;
-        case 2:
-            atenderPaciente();
-            break;
-        case 3:
-            finalizarConsulta();
-            break;
-        case 4:
-            mostrarColaEspera();
-            break;
-        case 5:
-            verifi = false;
-            break;
-        default:
-            verifi = false;
-            break;
-        }
-
-    }while(verifi);
-}
-void menuConsultas(){
-    cout<<"Consultas";
     bool verifi;
     createConsultorios();
     do{
@@ -323,43 +244,6 @@ int pedirOrden(){
     return opc;
 }
 void menuEstadisticas(){
-    bool verifi;
-    do{
-        cout<<"\n\n=================================";
-        cout<<"\nEstadísticas";
-        cout<<"\n=================================";
-        cout<<"\n\n1.- Total de pacientes registrados";
-        cout<<"\n2.- Pacientes atendidos";
-        cout<<"\n3.- Pacientes en espera";
-        cout<<"\n4.- Resumen general";
-        cout<<"\n5.- Salir\n\nIngrese el número de la operación que desea realizar: ";
-        cout<<"";
-
-        int opc = 0;
-        cin>>opc;
-
-        switch (opc){
-        case 1:
-            mostrarTotal();
-            break;
-        case 2:
-            mostrarAtendidos();
-            break;
-        case 3:
-            mostrarEnCola();
-            break;
-        case 4:
-            mostrarResumen();
-            break;
-        case 5:
-            verifi = false;
-            break;
-        default:
-            verifi = false;
-            break;
-        }
-
-    }while(verifi);
     bool verifi;
     do{
         cout<<"\n\n=================================";
